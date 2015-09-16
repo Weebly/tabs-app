@@ -1,0 +1,249 @@
+/**
+ * Put all of your styles for your element in here!
+ * @required
+ */
+
+/* Default tab variables */
+@tab-font-weight: bold;
+@tab-height: 60px;
+@user-tab-width: @tab_width * 1%;
+
+/*= Base
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/* Border box class */
+.border-box {
+	-moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Tabs Wrapper */
+.tabbed-box-tab-group {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	height: @tab-height;
+	width: 100%;
+	.border-box;
+}
+
+/* Single Tab */
+.tabbed-box-tab {
+	float: left;
+	margin: 0;
+	cursor: pointer;
+	height: @tab-height;
+	width: @user-tab-width;
+	font-weight: @tab-font-weight;
+	overflow: hidden;
+	position: relative;
+	.border-box;
+}
+
+/* Wrapper for all tab content divs */
+.tabbed-box-content-group {
+	clear: both;
+	float: left;
+	width: 100%;
+	.border-box;
+}
+
+/* Tab content */
+.tabbed-box-content {
+	padding: 40px 20px 40px 20px;
+	display: none;
+}
+
+
+/*= Standard
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/* Standard colors */
+@standard-header-color: #A8ABAC;
+@standard-border-color: #CCCCCC;
+@standard-tab-background-color: #F7F7F7;
+
+.standard {
+	/* Tabs Wrapper */
+	.tabbed-box-tab-group {
+		border-bottom: 1px solid @standard-border-color;
+		border-left: 1px solid @standard-border-color;
+	}
+
+	/* Single Tab */
+	.tabbed-box-tab {
+		border: 1px solid @standard-border-color;
+		border-left: none;
+
+		.paragraph {
+			color: @standard-header-color;
+			background-color: @standard-tab-background-color;
+		}
+	}
+
+	/* Currently selected tab */
+	.tabbed-box-tab.active {
+		border-bottom: 1px solid white;
+	}
+
+	/* Wrapper for all tab content divs */
+	.tabbed-box-content-group {
+		border: 1px solid @standard-border-color;
+		border-top: none;
+	}
+}
+
+/*= Line
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/* Line colors */
+@line-header-color: #BDC2C2;
+@line-border-color: #CCCCCC;
+@line-tab-highlight-color: black;
+@line-tab-background-color: white;
+
+.line {
+	/* Tabs Wrapper */
+	.tabbed-box-tab-group {
+		border: 1px solid @line-border-color;
+		border-bottom: none;
+	}
+
+	/* Single Tab */
+	.tabbed-box-tab {
+		border-bottom: 1px solid @line-border-color;
+
+		.paragraph {
+			color: @line-header-color;
+			background-color: @line-tab-background-color;
+		}
+	}
+
+	/* Currently selected tab */
+	.tabbed-box-tab.active {
+		border-bottom: 1px solid @line-tab-highlight-color;
+	}
+
+	/* Wrapper for all tab content divs */
+	.tabbed-box-content-group {
+		border: 1px solid @line-border-color;
+	}
+}
+
+/*= Simple
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/* Simple colors */
+@simple-header-color: #BDC2C2;
+@simple-border-color: #CCCCCC;
+@simple-tab-highlight-color: black;
+@simple-tab-background-color: white;
+
+.simple {
+	/* Single Tab */
+	.tabbed-box-tab {
+		border-bottom: 1px solid @simple-border-color;
+		height: @tab-height + 1px;
+
+		.paragraph {
+			color: @simple-header-color;
+			background-color: @simple-tab-background-color;
+		}
+	}
+
+	/* Currently selected tab */
+	.tabbed-box-tab.active {
+		border-bottom: 1px solid @simple-tab-highlight-color;
+	}
+
+	/* Wrapper for all tab content divs */
+	.tabbed-box-content-group {
+		border-top: 1px solid @simple-border-color;
+	}
+
+	/* Tab content */
+	.tabbed-box-content {
+		padding: 20px 0px 20px 0px;
+	}
+}
+
+/*= 3D
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/* 3d colors */
+@s3d-header-color: #A8ABAC;
+@s3d-tab-background-color: #F7F7F7;
+@s3d-shadow-color: rgba(245,245,245,1);
+
+/* Base for shadow mixins */
+.s3d-shadow {
+	-webkit-box-shadow: @s3d-shadow-horizontal @s3d-shadow-vertical @s3d-shadow-blur @s3d-shadow-spread @s3d-shadow-color;
+	-moz-box-shadow: @s3d-shadow-horizontal @s3d-shadow-vertical @s3d-shadow-blur @s3d-shadow-spread @s3d-shadow-color;
+	box-shadow: @s3d-shadow-horizontal @s3d-shadow-vertical @s3d-shadow-blur @s3d-shadow-spread @s3d-shadow-color;
+}
+/* Base for shadow mixins - @shadows is comma separated list of shadows */
+.s3d-shadow-multiple {
+	-webkit-box-shadow: @shadows;
+	-moz-box-shadow: @shadows;
+	box-shadow: @shadows;
+}
+
+/* Content shadow mixin */
+.s3d-content-shadow {
+	@s3d-shadow-blur: 30px;
+	@s3d-shadow-spread: 4px;
+	@s3d-shadow-vertical: 0px;
+	@s3d-shadow-horizontal: 0px;
+
+	.s3d-shadow;
+}
+
+/* Tab shadow mixin - generated for every side except bottom*/
+.s3d-tab-shadow {
+	@shadows: 0px -10px 31px -4px rgba(245,245,245,1), 
+			 -12px -4px 40px -16px rgba(245,245,245,1),
+			 12px -4px 40px -16px rgba(245,245,245,1);
+
+	.s3d-shadow-multiple;
+}
+
+.s3d {
+	/* Single Tab */
+	.tabbed-box-tab {
+		.paragraph {
+			color: @s3d-header-color;
+			background-color: @s3d-tab-background-color;
+		}
+	}
+
+	/* Currently selected tab */
+	.tabbed-box-tab.active {
+		.s3d-tab-shadow;
+	}
+
+	/* Wrapper for all tab content divs */
+	.tabbed-box-content-group {
+		.s3d-content-shadow;
+	}
+}
+
+/*= Text fields
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/* Tab text field */
+.tabbed-box-tab .paragraph {
+	padding: 0px 20px 0px 20px;
+	line-height: @tab-height;
+	text-align: center !important;
+	font-weight: @tab-font-weight;
+}
+
+/* Currently selected tab text field */
+.tabbed-box-tab.active .paragraph {
+	color: black;
+	background-color: white;
+}
+
+/* Tab content text field */
+.tabbed-box-content .paragraph {
+	padding: 0;
+	line-height: 30px;
+}
