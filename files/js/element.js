@@ -9,8 +9,8 @@
 		},
 
 		initialize: function() {
-			var tabs = this.$el.find('.tabbed-box-tab');
-			var content = this.$el.find('.tabbed-box-content');
+			var tabs = this.$('.tabbed-box-tab');
+			var content = this.$('.tabbed-box-content');
 
 			// Default to first tab
 			tabs.first().addClass('active');
@@ -24,15 +24,19 @@
 		*/
 		clickTab: function(e) {
 			var active = $(e.currentTarget); // Clicked tab
-			var content_wrapper = this.$el.find('.tabbed-box-content-group'); // wrapper for all content divs
+			var content_wrapper = this.$('.tabbed-box-content-group'); // wrapper for all content divs
 
 			// Set new active tab
 			active.siblings().removeClass('active');
 			active.addClass('active');
 
+
 			// Set new active content
 			content_wrapper.children().hide();
 			content_wrapper.find('.' + active.attr('rel')).fadeIn();
+
+			// Stop propagation in case this is a nested tab app
+			e.stopPropagation();
 		}
 	});
 	return TabbedBox;
