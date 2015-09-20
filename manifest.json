@@ -15,8 +15,27 @@
 				"properties": [
 					{
 						"type": "group",
-						"name": "settings",
-						"label": "Settings",
+						"name": "style",
+						"label": "Style",
+						"properties": [
+							{
+								"name": "theme",
+								"label": "Theme",
+								"type": "select",
+								"default": "standard",
+								"values": [
+									{"name":"Standard", "value": "standard"},
+									{"name":"Line", "value": "line"},
+									{"name":"3D", "value": "s3d"},
+									{"name":"Simple", "value": "simple"}
+		                        ]
+							}
+						]
+					},
+					{
+						"type": "group",
+						"name": "tabs-setting",
+						"label": "Tabs",
 						"properties": [
 							{
 								"name": "tabs",
@@ -33,18 +52,31 @@
 								"default": 20,
 								"min": "1",
 								"max": "100"
+							}
+						]
+					},
+					{
+						"type": "group",
+						"name": "color-setting",
+						"label": "Color",
+						"properties": [
+							{
+								"name": "active_tab",
+								"label": "Active Tab",
+								"type": "color",
+								"default": "white"
 							},
 							{
-								"name": "theme",
-								"label": "Theme",
-								"type": "select",
-								"default": "standard",
-								"values": [
-									{"name":"Standard", "value": "standard"},
-									{"name":"Line", "value": "line"},
-									{"name":"3D", "value": "s3d"},
-									{"name":"Simple", "value": "simple"}
-		                        ]
+								"name": "inactive_tab",
+								"label": "Inactive Tab",
+								"type": "color",
+								"default": "#F7F7F7"
+							},
+							{
+								"name": "border_color",
+								"label": "Border",
+								"type": "color",
+								"default": "#CCCCCC"
 							}
 						]
 					}

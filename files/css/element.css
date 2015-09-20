@@ -40,6 +40,7 @@
 	font-weight: @tab-font-weight;
 	overflow: hidden;
 	position: relative;
+	background-color: @inactive_tab;
 	.border-box;
 }
 
@@ -62,35 +63,32 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* Standard colors */
 @standard-header-color: #A8ABAC;
-@standard-border-color: #CCCCCC;
-@standard-tab-background-color: #F7F7F7;
 
 .standard {
 	/* Tabs Wrapper */
 	.tabbed-box-tab-group {
-		border-bottom: 1px solid @standard-border-color;
-		border-left: 1px solid @standard-border-color;
+		border-bottom: 1px solid @border_color;
+		border-left: 1px solid @border_color;
 	}
 
 	/* Single Tab */
 	.tabbed-box-tab {
-		border: 1px solid @standard-border-color;
+		border: 1px solid @border_color;
 		border-left: none;
 
 		.paragraph {
 			color: @standard-header-color;
-			background-color: @standard-tab-background-color;
 		}
 	}
 
 	/* Currently selected tab */
 	.tabbed-box-tab.active {
-		border-bottom: 1px solid white;
+		border-bottom: 1px solid @active_tab;
 	}
 
 	/* Wrapper for all tab content divs */
 	.tabbed-box-content-group {
-		border: 1px solid @standard-border-color;
+		border: 1px solid @border_color;
 		border-top: none;
 	}
 }
@@ -99,24 +97,22 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* Line colors */
 @line-header-color: #BDC2C2;
-@line-border-color: #CCCCCC;
 @line-tab-highlight-color: black;
-@line-tab-background-color: white;
 
 .line {
 	/* Tabs Wrapper */
 	.tabbed-box-tab-group {
-		border: 1px solid @line-border-color;
+		border: 1px solid @border_color;
 		border-bottom: none;
 	}
 
 	/* Single Tab */
 	.tabbed-box-tab {
-		border-bottom: 1px solid @line-border-color;
+		border-bottom: 1px solid @border_color;
 
 		.paragraph {
+			background-color: white;
 			color: @line-header-color;
-			background-color: @line-tab-background-color;
 		}
 	}
 
@@ -127,7 +123,7 @@
 
 	/* Wrapper for all tab content divs */
 	.tabbed-box-content-group {
-		border: 1px solid @line-border-color;
+		border: 1px solid @border_color;
 	}
 }
 
@@ -135,19 +131,16 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* Simple colors */
 @simple-header-color: #BDC2C2;
-@simple-border-color: #CCCCCC;
-@simple-tab-highlight-color: black;
-@simple-tab-background-color: white;
 
 .simple {
 	/* Single Tab */
 	.tabbed-box-tab {
-		border-bottom: 1px solid @simple-border-color;
+		border-bottom: 1px solid @border_color;
 		height: @tab-height + 1px;
 
 		.paragraph {
+			background-color: white;
 			color: @simple-header-color;
-			background-color: @simple-tab-background-color;
 		}
 	}
 
@@ -158,7 +151,7 @@
 
 	/* Wrapper for all tab content divs */
 	.tabbed-box-content-group {
-		border-top: 1px solid @simple-border-color;
+		border-top: 1px solid @border_color;
 	}
 
 	/* Tab content */
@@ -171,7 +164,6 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* 3d colors */
 @s3d-header-color: #A8ABAC;
-@s3d-tab-background-color: #F7F7F7;
 @s3d-shadow-color: rgba(245,245,245,1);
 
 /* Base for shadow mixins */
@@ -211,12 +203,13 @@
 	.tabbed-box-tab {
 		.paragraph {
 			color: @s3d-header-color;
-			background-color: @s3d-tab-background-color;
+			background-color: @inactive_tab;
 		}
 	}
 
 	/* Currently selected tab */
 	.tabbed-box-tab.active {
+		border-bottom: 1px solid @active_tab;
 		.s3d-tab-shadow;
 	}
 
@@ -238,8 +231,7 @@
 
 /* Currently selected tab text field */
 .tabbed-box-tab.active .paragraph {
-	color: black;
-	background-color: white;
+	background-color: @active_tab;
 }
 
 /* Tab content text field */
