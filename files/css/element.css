@@ -3,10 +3,19 @@
  * @required
  */
 
+/* the min function isn't working right now, so... */
+.minWidth(@a, @b) {
+	min-width: @b * 1%;
+}
+.minWidth(@a, @b) when (@a < @b) {
+	min-width: @a * 1%;
+}
+
 /* Default tab variables */
 @tab-font-weight: bold;
 @tab-height: 60px;
-@user-tab-width: @tab_width * 1%;
+/* @minimum-tab-width: min(20, 100 / @tabs) * 1%; */
+@maximum-tab-width: (100 / @tabs) * 1%;
 
 /*= Base
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -36,7 +45,9 @@
 	margin: 0;
 	cursor: pointer;
 	height: @tab-height;
-	width: @user-tab-width;
+	/* min-width: @minimum-tab-width; */
+	.minWidth(20, 100 / @tabs);
+	max-width: @maximum-tab-width;
 	font-weight: @tab-font-weight;
 	overflow: hidden;
 	position: relative;

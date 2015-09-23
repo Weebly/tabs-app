@@ -44,14 +44,6 @@
 								"default": 2,
 								"min": "1",
 								"max": "10"
-							},
-							{
-								"name": "tab_width",
-								"label": "Tab Width (%)",
-								"type": "int",
-								"default": 20,
-								"min": "1",
-								"max": "100"
 							}
 						]
 					},
