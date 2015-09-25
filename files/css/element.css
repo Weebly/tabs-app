@@ -3,10 +3,17 @@
  * @required
  */
 
+/* the min function isn't working right now, so... */
+.lowerWidth(@a, @b) {
+	width: @b * 1%;
+}
+.lowerWidth(@a, @b) when (@a < @b) {
+	width: @a * 1%;
+}
+
 /* Default tab variables */
 @tab-font-weight: bold;
 @tab-height: 60px;
-@user-tab-width: @tab_width * 1%;
 
 /*= Base
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -36,8 +43,7 @@
 	margin: 0;
 	cursor: pointer;
 	height: @tab-height;
-	width: @user-tab-width;
-	font-weight: @tab-font-weight;
+	.lowerWidth(20, 100 / @tabs);
 	overflow: hidden;
 	position: relative;
 	background-color: @inactive_tab;
@@ -84,6 +90,7 @@
 	/* Currently selected tab */
 	.tabbed-box-tab.active {
 		border-bottom: 1px solid @active_tab;
+		background-color: @active_tab;
 	}
 
 	/* Wrapper for all tab content divs */
@@ -111,7 +118,6 @@
 		border-bottom: 1px solid @border_color;
 
 		.paragraph {
-			background-color: white;
 			color: @line-header-color;
 		}
 	}
@@ -119,6 +125,7 @@
 	/* Currently selected tab */
 	.tabbed-box-tab.active {
 		border-bottom: 1px solid @line-tab-highlight-color;
+		background-color: @active_tab;
 	}
 
 	/* Wrapper for all tab content divs */
@@ -139,7 +146,6 @@
 		height: @tab-height + 1px;
 
 		.paragraph {
-			background-color: white;
 			color: @simple-header-color;
 		}
 	}
@@ -147,6 +153,7 @@
 	/* Currently selected tab */
 	.tabbed-box-tab.active {
 		border-bottom: 1px solid @simple-tab-highlight-color;
+		background-color: @active_tab;
 	}
 
 	/* Wrapper for all tab content divs */
@@ -210,6 +217,7 @@
 	/* Currently selected tab */
 	.tabbed-box-tab.active {
 		border-bottom: 1px solid @active_tab;
+		background-color: @active_tab;
 		.s3d-tab-shadow;
 	}
 
@@ -223,10 +231,14 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* Tab text field */
 .tabbed-box-tab .paragraph {
-	padding: 0px 20px 0px 20px;
+	padding: 0px;
 	line-height: @tab-height;
 	text-align: center !important;
 	font-weight: @tab-font-weight;
+	background-color: @inactive_tab;
+	margin: 0 20px;
+	overflow-x: scroll;
+	white-space: nowrap;
 }
 
 /* Currently selected tab text field */
