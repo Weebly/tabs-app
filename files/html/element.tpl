@@ -1,4 +1,10 @@
 <div class="tabbed-box {{theme}}">
+    <div class="scrollArrow scrollArrow-left">
+        <span class="scrollArrow-text">&lt;</span>
+    </div>
+    <div class="scrollArrow scrollArrow-right">
+        <span class="scrollArrow-text">&gt;</span>
+    </div>
     <ul class="tabbed-box-tab-group">
     {{#tabs_each}}
         <li class="tabbed-box-tab" rel="tab-{{tabs_index}}">
