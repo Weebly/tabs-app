@@ -37,9 +37,13 @@
             // determine whether or not we should show the scroll handlers
             this.determineScrollability();
 
-            // load first tab
+            // load whichever tab was open
             $(document).ready(function() {
-                this.scrollTabsBar.children().first().click();
+                if (this.settings.get('activeTabIndexInternal') >= this.scrollTabsBar.children().length) {
+                    this.scrollTabsBar.children().last().click();
+                } else {
+                    $(this.scrollTabsBar.children()[this.settings.get('activeTabIndexInternal')]).click();
+                }
             }.bind(this));
         },
 
@@ -51,7 +55,7 @@
         clickTab: function(e) {
             var active = $(e.currentTarget); // Clicked tab
             var content_wrapper = this.$('.tabbed-box-content-group'); // wrapper for all content divs
-
+ 
             this.determineScroll(active);
 
             // Set new active tab

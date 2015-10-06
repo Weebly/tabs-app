@@ -74,7 +74,7 @@
         width: calc(~"100% - 50px");
         margin: 0 25px;
         border-bottom: none;
-        overflow-x: scroll;
+        overflow-x: hidden;
         overflow-y: hidden;
     }
 
@@ -85,10 +85,17 @@
         position: absolute;
         display: block;
         top: 0;
+        cursor: pointer;
         height: @tab-height;
         line-height: @tab-height;
         font-weight: bold;
         .border-box;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
 
         span {
             opacity: .25;
@@ -157,20 +164,10 @@
 
         .scrollArrow-left {
             border: 1px solid @border_color;
-            border-right: none;
-
-            &.active {
-                border-right: 1px solid @border_color;
-            }
         }
 
         .scrollArrow-right {
             border: 1px solid @border_color;
-            border-left: none;
-
-            &.active {
-                border-left: 1px solid @border_color;
-            }
         }
     }
     
