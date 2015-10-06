@@ -219,22 +219,12 @@
 
         .scrollArrow-left {
             border: 1px solid @border_color;
-            border-right: none;
             height: 61px;
-
-            &.active {
-                border-right: 1px solid @border_color;
-            }
         }
 
         .scrollArrow-right {
             border: 1px solid @border_color;
-            border-left: none;
             height: 61px;
-
-            &.active {
-                border-left: 1px solid @border_color;
-            }
         }
     }
     
@@ -274,19 +264,11 @@
     }
 
     .scrollArrow-left {
-        border: none;
-
-        &.active {
-            border-right: 1px solid @border_color;
-        }
+        border-right: 1px solid @border_color;
     }
 
     .scrollArrow-right {
-        border: none;
-
-        &.active {
-            border-left: 1px solid @border_color;
-        }
+        border-left: 1px solid @border_color;
     }
 }
 
