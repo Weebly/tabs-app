@@ -41,14 +41,8 @@
             // determine whether or not we should show the scroll handlers
             this.determineScrollability();
 
-            // load whichever tab was open
-            $(document).ready(function() {
-                if (this.settings.get('activeTabIndexInternal') >= this.scrollTabsBar.children().length) {
-                    this.scrollTabsBar.children().last().click();
-                } else {
-                    $(this.scrollTabsBar.children()[this.settings.get('activeTabIndexInternal')]).click();
-                }
-            }.bind(this));
+            // then start the interval to load the initial tab.
+            this.loadInitialTab();
         },
 
         /*
@@ -78,6 +72,21 @@
 
             // Stop propagation in case this is a nested tab app
             e.stopPropagation();
+        },
+
+        // since we need to wait for all the text to load before we can know how far to scroll...
+        loadInitialTab: function() {
+            this.placeholderTimeout = setInterval(function() {
+                if (this.$('.tabbed-box-tab > .platform-element-child-placeholder').length == 0) {
+                    // if we have a tab index stored, use that.
+                    if (this.settings.get('activeTabIndexInternal') >= this.scrollTabsBar.children().length) {
+                        this.scrollTabsBar.children().last().click();
+                    } else {
+                        $(this.scrollTabsBar.children()[this.settings.get('activeTabIndexInternal')]).click();
+                    }
+                    clearInterval(this.placeholderTimeout);
+                }
+            }.bind(this), 100);
         },
 
         // determines whether or not the two arrows (left and right scroll handlers) should be visible or not.
