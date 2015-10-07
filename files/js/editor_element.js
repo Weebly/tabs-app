@@ -103,7 +103,7 @@
             }
 
             // right handler
-            if (target.scrollLeft + target.clientWidth != target.scrollWidth) {
+            if (target.scrollLeft + target.clientWidth < target.scrollWidth - 1) {
                 this.scrollArrowRight.addClass('active');
             } else {
                 this.scrollArrowRight.removeClass('active');
