@@ -64,60 +64,75 @@
 }
 
 .scrollArrow {
+    width: 25px;
+    background-color: @active_tab;
+    text-align: center;
+    position: absolute;
+    z-index: 3;
+    top: 0;
     display: none;
+    cursor: pointer;
+    height: @tab-height;
+    line-height: @tab-height;
+    font-weight: bold;
+    .border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &.scrollArrow-left {
+        left: 0;
+    }
+
+    &.scrollArrow-right {
+        right: 0;
+    }
 }
 
 /* Scrollable classes */
 .tabbed-box.scrollable {
     .tabbed-box-tab-group {
-        /* 50px = width of handlers */
-        width: calc(~"100% - 50px");
-        margin: 0 25px;
         border-bottom: none;
         overflow-x: hidden;
         overflow-y: hidden;
     }
 
-    .scrollArrow {
-        width: 25px;
-        background-color: @active_tab;
-        text-align: center;
-        position: absolute;
+    .tabbed-box-bar:hover .scrollArrow.active {
         display: block;
-        top: 0;
-        cursor: pointer;
-        height: @tab-height;
-        line-height: @tab-height;
-        font-weight: bold;
-        .border-box;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-
-        span {
-            opacity: .25;
-        }
-
-        &.active {
-            cursor: pointer;
-
-            span {
-                opacity: 1;                
-            }
-        }
-
-        &.scrollArrow-left {
-            left: 0;
-        }
-
-        &.scrollArrow-right {
-            right: 0;
-        }
     }
 }
+
+/* iphone 6s */
+@media
+only screen 
+and (min-device-width: 414px) 
+and (max-device-width: 736px) 
+and (-webkit-min-device-pixel-ratio: 3),
+/* iphone 6 */
+only screen 
+and (min-device-width: 375px) 
+and (max-device-width: 667px) 
+and (-webkit-min-device-pixel-ratio: 2),
+/* iphone 5 */
+only screen 
+and (min-device-width: 320px) 
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2),
+/* iphone 4 */
+only screen 
+and (min-device-width: 320px) 
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2),
+only screen and (max-width: 499px)
+{
+    .tabbed-box-tab-group {
+        overflow-x: scroll !important;
+    }
+}
+
 
 /*= Standard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -155,13 +170,12 @@
 
     &.scrollable {
         .tabbed-box-tab-group {
-            border-left: none;
+            border-right: 1px solid @border_color;
 
             .tabbed-box-tab:last-child {
                 border-right: none;
             }
         }
-
         .scrollArrow-left {
             border: 1px solid @border_color;
         }
@@ -208,8 +222,6 @@
 
     &.scrollable {
         .tabbed-box-tab-group {
-            border-left: none;
-            border-right: none;
             height: 61px;
         }
 
@@ -217,13 +229,10 @@
             border-top: none;
         }
 
-        .scrollArrow-left {
+        .scrollArrow-left, .scrollArrow-right {
             border: 1px solid @border_color;
-            height: 61px;
-        }
-
-        .scrollArrow-right {
-            border: 1px solid @border_color;
+            border-bottom: none;
+            border-top: none;
             height: 61px;
         }
     }
@@ -284,12 +293,6 @@
     -moz-box-shadow: @s3d-shadow-horizontal @s3d-shadow-vertical @s3d-shadow-blur @s3d-shadow-spread @s3d-shadow-color;
     box-shadow: @s3d-shadow-horizontal @s3d-shadow-vertical @s3d-shadow-blur @s3d-shadow-spread @s3d-shadow-color;
 }
-/* Base for shadow mixins - @shadows is comma separated list of shadows */
-.s3d-shadow-multiple {
-    -webkit-box-shadow: @shadows;
-    -moz-box-shadow: @shadows;
-    box-shadow: @shadows;
-}
 
 /* Content shadow mixin */
 .s3d-content-shadow {
@@ -301,16 +304,9 @@
     .s3d-shadow;
 }
 
-/* Tab shadow mixin - generated for every side except bottom*/
-.s3d-tab-shadow {
-    @shadows: 0px -10px 31px -4px rgba(245,245,245,1), 
-             -12px -4px 40px -16px rgba(245,245,245,1),
-             12px -4px 40px -16px rgba(245,245,245,1);
-
-    .s3d-shadow-multiple;
-}
-
 .s3d {
+    @shadows: 0px -10px 31px -4px rgba(245,245,245,1), -12px -4px 40px -16px rgba(245,245,245,1), 12px -4px 40px -16px rgba(245,245,245,1);
+
     /* Single Tab */
     .tabbed-box-tab {
         .paragraph {
@@ -323,7 +319,9 @@
     .tabbed-box-tab.active {
         border-bottom: 1px solid @active_tab;
         background-color: @active_tab;
-        .s3d-tab-shadow;
+        -webkit-box-shadow: @shadows;
+        -moz-box-shadow: @shadows;
+        box-shadow: @shadows;
 
         .paragraph {
             background-color: @active_tab;
