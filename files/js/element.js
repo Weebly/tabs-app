@@ -41,7 +41,7 @@
             // determine whether or not we should show the scroll handlers
             this.determineScrollability();
 
-            // load whichever tab was open
+            // load the first tab.
             $(document).ready(function() {
                 this.scrollTabsBar.children().first().click();
             }.bind(this));
@@ -100,7 +100,7 @@
             }
 
             // right handler
-            if (target.scrollLeft + target.clientWidth != target.scrollWidth) {
+            if (target.scrollLeft + target.clientWidth != target.scrollWidth - 1) {
                 this.scrollArrowRight.addClass('active');
             } else {
                 this.scrollArrowRight.removeClass('active');
@@ -154,11 +154,11 @@
 
             // determine where the element we're going to is in respect to the tabs bar
             // 25px is the size of the scroll arrows
-            var leftSidePosition = active.position().left - 25;
-            var rightSidePosition = active.position().left + active.width() + 25;
+            var leftSidePosition = active.position().left - 50;
+            var rightSidePosition = active.position().left + active.width() + 50;
             // the gap is how much space we want there to be between the selected element
             // when it's out of view, and we go to it.
-            var gap = 50; 
+            var gap = 25; 
             if (this.scrollTabsBar.children().index(active) == 0) {
                 // this the first element, so define the scroll to be 0.
                 scroll = 0;
