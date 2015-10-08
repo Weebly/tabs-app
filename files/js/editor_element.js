@@ -41,12 +41,9 @@
             // determine whether or not we should show the scroll handlers
             this.determineScrollability();
 
-            // load the first tab.
-            $(document).ready(function() {
-                this.scrollTabsBar.children().first().click();
-            }.bind(this));
+            // then start the interval to load the initial tab.
+            this.loadInitialTab();
         },
-
 
         /*
             Handle click event on a tab.
@@ -56,7 +53,7 @@
         clickTab: function(e) {
             var active = $(e.currentTarget); // Clicked tab
             var content_wrapper = this.$('.tabbed-box-content-group'); // wrapper for all content divs
-
+ 
             this.stopScrolling();
             this.determineClickScroll(active);
 
@@ -75,6 +72,21 @@
 
             // Stop propagation in case this is a nested tab app
             e.stopPropagation();
+        },
+
+        // since we need to wait for all the text to load before we can know how far to scroll...
+        loadInitialTab: function() {
+            this.placeholderTimeout = setInterval(function() {
+                if (this.$('.tabbed-box-tab > .platform-element-child-placeholder').length == 0) {
+                    // if we have a tab index stored, use that.
+                    if (this.settings.get('activeTabIndexInternal') >= this.scrollTabsBar.children().length) {
+                        this.scrollTabsBar.children().last().click();
+                    } else {
+                        $(this.scrollTabsBar.children()[this.settings.get('activeTabIndexInternal')]).click();
+                    }
+                    clearInterval(this.placeholderTimeout);
+                }
+            }.bind(this), 100);
         },
 
         // determines whether or not the two arrows (left and right scroll handlers) should be visible or not.
@@ -100,7 +112,7 @@
             }
 
             // right handler
-            if (target.scrollLeft + target.clientWidth != target.scrollWidth - 1) {
+            if (target.scrollLeft + target.clientWidth < target.scrollWidth - 1) {
                 this.scrollArrowRight.addClass('active');
             } else {
                 this.scrollArrowRight.removeClass('active');
@@ -122,7 +134,6 @@
                     view.stopScrolling();
                 }
             }, 10);
-
         },
 
         // scrolls the tabs bar to the right.
