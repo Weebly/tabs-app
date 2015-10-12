@@ -19,6 +19,9 @@
             var tabs = this.$('.tabbed-box-tab');
             var content = this.$('.tabbed-box-content');
 
+            // if we have any iframes, we get an overlay...
+            this.$el.children('.platform-element-overlay').hide();
+
             // optimization
             this.scrollArrowLeft = this.$('.scrollArrow-left');
             this.scrollArrowRight = this.$('.scrollArrow-right');
