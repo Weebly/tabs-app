@@ -339,10 +339,10 @@ only screen and (max-width: 499px)
 /* Tab text field */
 .tabbed-box-tab .paragraph {
     padding: 0px;
-    line-height: @tab-height;
+    line-height: @tab-height !important; /* beats responsive */
     text-align: center !important;
     font-weight: @tab-font-weight;
-    font-size: 16px; /* beats responsive styles that set it to rems */
+    font-size: 16px !important; /* beats responsive */
     margin: 0 20px;
 }
 
