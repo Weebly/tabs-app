@@ -100,7 +100,7 @@
             }
 
             // right handler
-            if (target.scrollLeft + target.clientWidth != target.scrollWidth - 1) {
+            if (target.scrollLeft + target.clientWidth < target.scrollWidth - 1) {
                 this.scrollArrowRight.addClass('active');
             } else {
                 this.scrollArrowRight.removeClass('active');
@@ -122,7 +122,6 @@
                     view.stopScrolling();
                 }
             }, 10);
-
         },
 
         // scrolls the tabs bar to the right.
