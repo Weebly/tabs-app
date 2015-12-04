@@ -73,6 +73,9 @@
             content_wrapper.find('.' + active.attr('rel')).fadeIn();
             this.determineHandlers();
 
+            // fire resize event to handle any deterministic elements now appearing
+            $(window).resize();
+
             // Stop propagation in case this is a nested tab app
             e.stopPropagation();
         },
@@ -80,7 +83,7 @@
         // since we need to wait for all the text to load before we can know how far to scroll...
         loadInitialTab: function() {
             this.placeholderTimeout = setInterval(function() {
-                if (this.$('.tabbed-box-tab > .platform-element-child-placeholder').length == 0) {
+                if (this.$('.tabbed-box-tab > .platform-element-child-placeholder').length === 0) {
                     // if we have a tab index stored, use that.
                     if (this.settings.get('activeTabIndexInternal') >= this.scrollTabsBar.children().length) {
                         this.scrollTabsBar.children().last().click();
@@ -108,7 +111,7 @@
             var target = this.scrollTabsBar[0];
 
             // left handler
-            if (target.scrollLeft != 0) {
+            if (target.scrollLeft !== 0) {
                 this.scrollArrowLeft.addClass('active');
             } else {
                 this.scrollArrowLeft.removeClass('active');
@@ -133,7 +136,7 @@
             this.scrollInterval = setInterval(function() {
                 scrollEl.scrollLeft -= Math.floor(factor);
                 factor *= 1.05;
-                if (scrollEl.scrollLeft == 0) {
+                if (scrollEl.scrollLeft === 0) {
                     view.stopScrolling();
                 }
             }, 10);
@@ -173,7 +176,7 @@
             // the gap is how much space we want there to be between the selected element
             // when it's out of view, and we go to it.
             var gap = 25; 
-            if (this.scrollTabsBar.children().index(active) == 0) {
+            if (this.scrollTabsBar.children().index(active) === 0) {
                 // this the first element, so define the scroll to be 0.
                 scroll = 0;
             } else if (this.scrollTabsBar.children().index(active) == this.scrollTabsBar.children().length - 1) {
@@ -193,7 +196,7 @@
             scroll = Math.floor(scroll);
             var delta = scroll - this.scrollTabsBar[0].scrollLeft;
             var startedDown = false;
-            if (delta != 0) {
+            if (delta !== 0) {
                 clearInterval(this.scrollInterval);
                 var distance = 0;
                 var direction = (delta > 0 ? 1 : -1);
