@@ -80,19 +80,13 @@
             e.stopPropagation();
         },
 
-        // since we need to wait for all the text to load before we can know how far to scroll...
+        // loads the first tab
         loadInitialTab: function() {
-            this.placeholderTimeout = setInterval(function() {
-                if (this.$('.tabbed-box-tab > .platform-element-child-placeholder').length === 0) {
-                    // if we have a tab index stored, use that.
-                    if (this.settings.get('activeTabIndexInternal') >= this.scrollTabsBar.children().length) {
-                        this.scrollTabsBar.children().last().click();
-                    } else {
-                        $(this.scrollTabsBar.children()[this.settings.get('activeTabIndexInternal')]).click();
-                    }
-                    clearInterval(this.placeholderTimeout);
-                }
-            }.bind(this), 100);
+            if (this.settings.get('activeTabIndexInternal') >= this.scrollTabsBar.children().length) {
+                this.scrollTabsBar.children().last().click();
+            } else {
+                $(this.scrollTabsBar.children()[this.settings.get('activeTabIndexInternal')]).click();
+            }
         },
 
         // determines whether or not the two arrows (left and right scroll handlers) should be visible or not.
