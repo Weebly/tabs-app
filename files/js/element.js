@@ -16,13 +16,11 @@
 
         initialize: function() {
             var view = this;
-            var tabs = this.$('.tabbed-box-tab');
-            var content = this.$('.tabbed-box-content');
 
             // optimization
-            this.scrollArrowLeft = this.$('.scrollArrow-left');
-            this.scrollArrowRight = this.$('.scrollArrow-right');
-            this.scrollTabsBar = this.$('.tabbed-box-tab-group');
+            this.scrollArrowLeft = this.$('> .tabbed-box > .tabbed-box-bar > .scrollArrow-left');
+            this.scrollArrowRight = this.$('> .tabbed-box > .tabbed-box-bar > .scrollArrow-right');
+            this.scrollTabsBar = this.$('> .tabbed-box > .tabbed-box-bar > .tabbed-box-tab-group');
 
             // resize handler and mouseup handler
             // since we want to be able to handle mouseup wherever the user releases (not just over the element)
@@ -34,7 +32,7 @@
             }.bind(this));
 
             // since scroll events don't propagate up, we have to bind it here as opposed to in the events object
-            this.$('.tabbed-box-tab-group').scroll(function() {
+            this.scrollTabsBar.scroll(function() {
                 this.determineHandlers();
             }.bind(this));
 
@@ -55,7 +53,7 @@
         */
         clickTab: function(e) {
             var active = $(e.currentTarget); // Clicked tab
-            var content_wrapper = this.$('.tabbed-box-content-group'); // wrapper for all content divs
+            var content_wrapper = this.$('> .tabbed-box > .tabbed-box-content-group'); // wrapper for all content divs
 
             this.stopScrolling();
             this.determineClickScroll(active);
@@ -68,9 +66,12 @@
             this.settings.set('activeTabIndexInternal', this.scrollTabsBar.children().index(active));
             this.settings.save();
 
+            // trigger children first
+            content_wrapper.find('.tabbed-box-tab.active').click();
+
             // Set new active content
             content_wrapper.children().hide();
-            content_wrapper.find('.' + active.attr('rel')).fadeIn();
+            content_wrapper.find('> .' + active.attr('rel')).fadeIn();
             this.determineHandlers();
 
             // fire resize event to handle any deterministic elements now appearing
